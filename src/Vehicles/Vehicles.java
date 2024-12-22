@@ -1,3 +1,5 @@
+package Vehicles;
+
 public abstract class Vehicles {
     String name;
     int cost;
@@ -37,19 +39,6 @@ public abstract class Vehicles {
     }
 }
 
-private class Transport implements Vehicles{
-    Transport(String name, int cost, int capacity) {
-        super(name);
-        super(cost);
-        super(capacity);
-    }
-}
 
-private class Tank implements Vehicles{
-    Tank(String name, int cost, int capacity) {
-        super(name);
-        super(cost);
-        super(capacity);
-    }
-}
+
 
