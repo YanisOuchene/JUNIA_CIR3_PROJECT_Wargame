@@ -21,16 +21,24 @@ public class Army {
         return armyPoints;
     }
 
-    public void setArmyName(String armyName) {
+    private void setArmyName(String armyName) {
         this.armyName = armyName;
     }
 
-    public void setArmyFaction(String armyFaction) {
+    private void setArmyFaction(String armyFaction) {
         this.armyFaction = armyFaction;
     }
 
-    public void setArmyPoints(int armyPoints) {
+    private void setArmyPoints(int armyPoints) {
         this.armyPoints = armyPoints;
+    }
+
+    public String toString() {
+        System.out.println(armyName);
+        System.out.println("=");
+        System.out.println("Faction : " + armyFaction);
+        System.out.println("=");
+        System.out.println("Points : " + armyPoints);
     }
 
 }

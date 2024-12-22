@@ -1,6 +1,6 @@
 public abstract class Units {
-    String name;
-    int cost;
+    private String name;
+    private int cost;
 
     public Units(String name, int cost) {
         this.name = name;
@@ -12,11 +12,43 @@ public abstract class Units {
     public int getCost() {
         return cost;
     }
-    public void setCost(int cost) {
+    private void setCost(int cost) {
         this.cost = cost;
+    }
+    private void setName(String name) {
+        this.name = name;
     }
     public void print() {
         System.out.println(getName() + " cost: " + getCost());
     }
 
+}
+
+private class Soldier implements Units{
+    Soldier(String name, int cost) {
+        super(name);
+        super(cost);
+
+    }
+}
+
+private class Heavy implements Units{
+    Heavy(String name, int cost) {
+        super(name);
+        super(cost);
+    }
+}
+
+private class Special implements Units{
+    Special(String name, int cost) {
+        super(name);
+        super(cost);
+    }
+}
+
+private class Chief implements Units{
+    Chief(String name, int cost) {
+        super(name);
+        super(cost);
+    }
 }
