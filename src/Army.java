@@ -1,5 +1,5 @@
-import Units.*;
-import Vehicles.*;
+import Units.Units;
+import Vehicles.Vehicles;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,8 +9,7 @@ public class Army {
     private String armyFaction;
     private int armyPoints;
 
-    List<Units> units = new ArrayList<Units>();
-    List<Vehicles> vehicles = new ArrayList<Vehicles>();
+    List<Group> army = new ArrayList<Group>();
 
     public Army(String armyName, String armyFaction, int armyPoints) {
         this.armyName = armyName;
@@ -30,6 +29,20 @@ public class Army {
         return armyPoints;
     }
 
+    public boolean deductPoints(int points) {
+        if (this.armyPoints >= points) {
+            this.armyPoints -= points;
+            return true;
+        } else {
+            System.out.println("Not enough points.");
+            return false;
+        }
+    }
+
+    public List<Group> getArmy() {
+        return army;
+    }
+
     private void setArmyName(String armyName) {
         this.armyName = armyName;
     }
@@ -42,24 +55,43 @@ public class Army {
         this.armyPoints = armyPoints;
     }
 
-    public void addUnits(Units unit, int nbUnit){
-        if (nbUnit * unit.getCost() > getArmyPoints()){
+    public void addGroup(String groupName) {
+        try {
+            army.add(new Group(groupName));
+        }
+        catch (Exception e) {
+            System.out.println("Please put a valid group name");
+        }
+    }
+    public void addUnits(Units unit, int nbUnits, int indexGroup){
+        if (nbUnits * unit.getCost() > getArmyPoints()){
             System.out.println("Unit points exceeds army points");
             return;
         }
-        units.add(unit);
+
+        army.get(indexGroup).addUnit(unit,nbUnits);
+        setArmyPoints( getArmyPoints() - (nbUnits * unit.getCost()) );
     }
 
-    public void addVehicles(Vehicles vehicle, int nbVehicle){
-        if (nbVehicle * vehicle.getCost() > getArmyPoints()){
+    public void addVehicles(Vehicles vehicle, int nbVehicles, int indexGroup){
+        if (nbVehicles * vehicle.getCost() > getArmyPoints()){
             System.out.println("Vehicle points exceeds army points");
             return;
         }
-        vehicles.add(vehicle);
+
+        army.get(indexGroup).addVehicle(vehicle,nbVehicles);
+        setArmyPoints( getArmyPoints() - (nbVehicles * vehicle.getCost()) );
     }
 
-    public String toString() {
-        return getArmyName() + " \n Faction : " + getArmyFaction() + " \n Points : " + getArmyPoints();
+    public void print(){
+        System.out.println("Army Name: " + armyName);
+        System.out.println("Army Faction: " + armyFaction);
+        System.out.println("Army Points: " + armyPoints);
+
+        for (Group group : army) {
+            group.print();
+        }
+
     }
 
 }
